@@ -7,35 +7,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.mvc.spring.thymeleaf.domain.Cargo;
-import br.com.mvc.spring.thymeleaf.repositories.CargoRepository;
+import br.com.mvc.spring.thymeleaf.domain.Departamento;
+import br.com.mvc.spring.thymeleaf.repositories.DepartamentoRepository;
 import br.com.mvc.spring.thymeleaf.services.exceptions.DataIntegrityViolationException;
 import br.com.mvc.spring.thymeleaf.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class CargoService {
+public class DepartamentoService {
 
 	@Autowired
-	CargoRepository cargoRepository;
+	DepartamentoRepository departamentoRepository;
 	
-	public void insert(Cargo obj) {
-		cargoRepository.save(obj);
+	public void insert(Departamento obj) {
+		departamentoRepository.save(obj);
 	}
 	
-	public Cargo update(Cargo obj) {
-		Cargo newObj = find(obj.getId());
+	public Departamento update(Departamento obj) {
+		Departamento newObj = find(obj.getId());
 		updateData(newObj, obj);
-		return cargoRepository.save(newObj);
+		return departamentoRepository.save(newObj);
 	}
 	
-	private void updateData(Cargo newObj, Cargo obj) {
+	private void updateData(Departamento newObj, Departamento obj) {
 		newObj.setNome(obj.getNome());
 	}
 	
 	public void delete(Integer id) {
 		find(id);		
 		try {
-			cargoRepository.deleteById(id);
+			departamentoRepository.deleteById(id);
 		}
 		catch(Exception ex) {
 			throw new DataIntegrityViolationException("Não é possível excluir o cliente porque há pedidos relacionados a ele");
@@ -43,15 +43,15 @@ public class CargoService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Cargo find(Integer id){
-		Optional<Cargo> obj = cargoRepository.findById(id);
+	public Departamento find(Integer id){
+		Optional<Departamento> obj = departamentoRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: "  + Cargo.class.getName()));
+				"Objeto não encontrado! Id: " + id + ", Tipo: "  + Departamento.class.getName()));
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Cargo> findAll() {
-		return cargoRepository.findAll();
+	public List<Departamento> findAll() {
+		return departamentoRepository.findAll();
 	}
 	
 }
