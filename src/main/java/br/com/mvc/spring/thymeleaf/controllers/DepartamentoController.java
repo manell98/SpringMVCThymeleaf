@@ -3,6 +3,7 @@ package br.com.mvc.spring.thymeleaf.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,7 +33,30 @@ public class DepartamentoController {
 	public String salvar(Departamento departamento) {
 		departamentoService.insert(departamento);
 		
-		return "redirect:/departamentos/cadastrar";
+		return "redirect:/departamentos/listar";
+	}
+	
+	@RequestMapping("editar/{id}")
+	public String find(@PathVariable("id") Integer id, ModelMap model) {
+		model.addAttribute("departamento", departamentoService.find(id));
+		
+		return "/departamento/cadastro";
+	}
+	
+	@RequestMapping(value= "editar", method=RequestMethod.POST)
+	public String editar(Departamento departamento) {
+		departamentoService.update(departamento);
+		
+		return "redirect:/departamentos/listar";
 	}
 	
 }
+
+
+
+
+
+
+
+
+
