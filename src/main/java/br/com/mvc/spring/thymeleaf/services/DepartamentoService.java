@@ -38,7 +38,7 @@ public class DepartamentoService {
 			departamentoRepository.deleteById(id);
 		}
 		catch(Exception ex) {
-			throw new DataIntegrityViolationException("Não é possível excluir o cliente porque há pedidos relacionados a ele");
+			throw new DataIntegrityViolationException("Não é possível excluir o departamento pois há cargos relacionados a ele");
 		}
 	}
 	

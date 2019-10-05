@@ -15,7 +15,7 @@ import br.com.mvc.spring.thymeleaf.services.DepartamentoService;
 public class DepartamentoController {
 	
 	@Autowired
-	private DepartamentoService departamentoService;
+	private DepartamentoService service;
 
 	@RequestMapping("cadastrar")
 	public String cadastrar(Departamento departamento) {	
@@ -24,39 +24,37 @@ public class DepartamentoController {
 	
 	@RequestMapping("listar")
 	public String listar(ModelMap model) {	
-		model.addAttribute("departamentos", departamentoService.findAll());
+		model.addAttribute("departamentos", service.findAll());
 		
 		return "departamento/lista";
 	}
 	
 	@RequestMapping(value= "salvar", method=RequestMethod.POST)
 	public String salvar(Departamento departamento) {
-		departamentoService.insert(departamento);
+		service.insert(departamento);
 		
 		return "redirect:/departamentos/listar";
 	}
 	
 	@RequestMapping("editar/{id}")
 	public String find(@PathVariable("id") Integer id, ModelMap model) {
-		model.addAttribute("departamento", departamentoService.find(id));
+		model.addAttribute("departamento", service.find(id));
 		
 		return "/departamento/cadastro";
 	}
 	
-	@RequestMapping(value= "editar", method=RequestMethod.POST)
+	@RequestMapping(value="editar", method=RequestMethod.POST)
 	public String editar(Departamento departamento) {
-		departamentoService.update(departamento);
+		service.update(departamento);
 		
 		return "redirect:/departamentos/listar";
 	}
 	
+	@RequestMapping("excluir/{id}")
+	public String excluir(@PathVariable("id") Integer id, ModelMap model) {
+		service.delete(id);
+		
+		return listar(model);
+	}
+	
 }
-
-
-
-
-
-
-
-
-
