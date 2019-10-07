@@ -32,8 +32,8 @@ public class DepartamentoController {
 	
 	@RequestMapping(value= "salvar", method=RequestMethod.POST)
 	public String salvar(Departamento departamento, RedirectAttributes attr) {
-		attr.addFlashAttribute("sucess", "Departamento cadastrado com sucesso!");
 		service.insert(departamento);
+		attr.addFlashAttribute("success", "Departamento cadastrado com sucesso!");
 		
 		return "redirect:/departamentos/listar";
 	}
@@ -48,7 +48,7 @@ public class DepartamentoController {
 	@RequestMapping(value="editar", method=RequestMethod.POST)
 	public String editar(Departamento departamento, RedirectAttributes attr) {
 		service.update(departamento);
-		attr.addFlashAttribute("sucess", "Departamento editado com sucesso!");
+		attr.addFlashAttribute("success", "Departamento editado com sucesso!");
 		
 		return "redirect:/departamentos/listar";
 	}
