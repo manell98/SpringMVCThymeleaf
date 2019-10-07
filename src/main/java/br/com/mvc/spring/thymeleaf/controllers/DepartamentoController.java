@@ -30,10 +30,11 @@ public class DepartamentoController {
 	}
 	
 	@RequestMapping(value= "salvar", method=RequestMethod.POST)
-	public String salvar(Departamento departamento) {
+	public String salvar(Departamento departamento, ModelMap model) {
+		model.addAttribute("success", "Departamento cadastrado com sucesso!");
 		service.insert(departamento);
 		
-		return "redirect:/departamentos/listar";
+		return listar(model);
 	}
 	
 	@RequestMapping("editar/{id}")
@@ -44,15 +45,22 @@ public class DepartamentoController {
 	}
 	
 	@RequestMapping(value="editar", method=RequestMethod.POST)
-	public String editar(Departamento departamento) {
+	public String editar(Departamento departamento, ModelMap model) {
 		service.update(departamento);
+		model.addAttribute("success", "Departamento editado com sucesso!");
 		
-		return "redirect:/departamentos/listar";
+		return listar(model);
 	}
 	
 	@RequestMapping("excluir/{id}")
 	public String excluir(@PathVariable("id") Integer id, ModelMap model) {
-		service.delete(id);
+		
+		if (service.depertamentoTemCargos(id)) {
+			model.addAttribute("fail", "Departamento não removido, possui cargo(s) vinculado(s) a ele!");
+		} else {
+			service.delete(id);
+			model.addAttribute("success", "Departamento excluído com sucesso!");
+		}
 		
 		return listar(model);
 	}

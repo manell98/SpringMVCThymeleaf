@@ -54,4 +54,10 @@ public class DepartamentoService {
 		return departamentoRepository.findAll();
 	}
 	
+	public boolean depertamentoTemCargos(Integer id) {
+		if (find(id).getCargos().isEmpty()) {
+			return false;
+		}
+		return true;
+	}	
 }
