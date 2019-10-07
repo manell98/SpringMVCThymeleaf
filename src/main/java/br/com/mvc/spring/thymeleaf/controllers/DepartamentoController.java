@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mvc.spring.thymeleaf.domain.Departamento;
 import br.com.mvc.spring.thymeleaf.services.DepartamentoService;
@@ -30,11 +31,11 @@ public class DepartamentoController {
 	}
 	
 	@RequestMapping(value= "salvar", method=RequestMethod.POST)
-	public String salvar(Departamento departamento, ModelMap model) {
-		model.addAttribute("success", "Departamento cadastrado com sucesso!");
+	public String salvar(Departamento departamento, RedirectAttributes attr) {
+		attr.addFlashAttribute("sucess", "Departamento cadastrado com sucesso!");
 		service.insert(departamento);
 		
-		return listar(model);
+		return "redirect:/departamentos/listar";
 	}
 	
 	@RequestMapping("editar/{id}")
@@ -45,11 +46,11 @@ public class DepartamentoController {
 	}
 	
 	@RequestMapping(value="editar", method=RequestMethod.POST)
-	public String editar(Departamento departamento, ModelMap model) {
+	public String editar(Departamento departamento, RedirectAttributes attr) {
 		service.update(departamento);
-		model.addAttribute("success", "Departamento editado com sucesso!");
+		attr.addFlashAttribute("sucess", "Departamento editado com sucesso!");
 		
-		return listar(model);
+		return "redirect:/departamentos/listar";
 	}
 	
 	@RequestMapping("excluir/{id}")
