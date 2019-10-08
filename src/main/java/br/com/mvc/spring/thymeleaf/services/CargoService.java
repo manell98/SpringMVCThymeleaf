@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.mvc.spring.thymeleaf.domain.Cargo;
 import br.com.mvc.spring.thymeleaf.repositories.CargoRepository;
-import br.com.mvc.spring.thymeleaf.services.exceptions.DataIntegrityViolationException;
 import br.com.mvc.spring.thymeleaf.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -34,12 +33,7 @@ public class CargoService {
 	
 	public void delete(Integer id) {
 		find(id);		
-		try {
-			cargoRepository.deleteById(id);
-		}
-		catch(Exception ex) {
-			throw new DataIntegrityViolationException("Não é possível excluir o cliente porque há pedidos relacionados a ele");
-		}
+		cargoRepository.deleteById(id);
 	}
 	
 	@Transactional(readOnly = true)
@@ -52,6 +46,13 @@ public class CargoService {
 	@Transactional(readOnly = true)
 	public List<Cargo> findAll() {
 		return cargoRepository.findAll();
+	}
+
+	public boolean cargoTemFuncionarios(Integer id) {
+		if(find(id).getFuncionarios().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 	
 }

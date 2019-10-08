@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.mvc.spring.thymeleaf.domain.Departamento;
 import br.com.mvc.spring.thymeleaf.repositories.DepartamentoRepository;
-import br.com.mvc.spring.thymeleaf.services.exceptions.DataIntegrityViolationException;
 import br.com.mvc.spring.thymeleaf.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -34,12 +33,7 @@ public class DepartamentoService {
 	
 	public void delete(Integer id) {
 		find(id);		
-		try {
-			departamentoRepository.deleteById(id);
-		}
-		catch(Exception ex) {
-			throw new DataIntegrityViolationException("Não é possível excluir o departamento pois há cargos relacionados a ele");
-		}
+		departamentoRepository.deleteById(id);
 	}
 	
 	@Transactional(readOnly = true)
@@ -55,7 +49,7 @@ public class DepartamentoService {
 	}
 	
 	public boolean depertamentoTemCargos(Integer id) {
-		if (find(id).getCargos().isEmpty()) {
+		if(find(id).getCargos().isEmpty()) {
 			return false;
 		}
 		return true;

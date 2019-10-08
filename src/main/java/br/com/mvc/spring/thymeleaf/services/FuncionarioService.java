@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.mvc.spring.thymeleaf.domain.Funcionario;
 import br.com.mvc.spring.thymeleaf.repositories.FuncionarioRepository;
-import br.com.mvc.spring.thymeleaf.services.exceptions.DataIntegrityViolationException;
 import br.com.mvc.spring.thymeleaf.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -37,12 +36,7 @@ public class FuncionarioService {
 	
 	public void delete(Integer id) {
 		find(id);		
-		try {
-			funcionarioRepository.deleteById(id);
-		}
-		catch(Exception ex) {
-			throw new DataIntegrityViolationException("Não é possível excluir o cliente porque há pedidos relacionados a ele");
-		}
+		funcionarioRepository.deleteById(id);
 	}
 	
 	@Transactional(readOnly = true)

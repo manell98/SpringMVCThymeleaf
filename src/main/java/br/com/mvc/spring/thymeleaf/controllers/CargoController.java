@@ -68,4 +68,17 @@ public class CargoController {
 		return "redirect:/cargos/listar";
 	}
 	
+	@RequestMapping("excluir/{id}")
+	public String excluir(@PathVariable("id") Integer id, RedirectAttributes attr) {
+		
+		if (service.cargoTemFuncionarios(id)) {
+			attr.addFlashAttribute("fail", "Cargo não removido, possui funcionário(s) vinculado(s) a ele!");
+		} else {
+			service.delete(id);
+			attr.addFlashAttribute("success", "Cargo excluído com sucesso!");
+		}
+		
+		return "redirect:/cargos/listar";
+	}
+	
 }
