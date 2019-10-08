@@ -48,8 +48,7 @@ public class CargoController {
 	}
 	
 	@ModelAttribute("departamentos")
-	public List<Departamento> listaDepartamentos() {
-		
+	public List<Departamento> listaDepartamentos() {		
 		return departamentoService.findAll();
 	}
 	
