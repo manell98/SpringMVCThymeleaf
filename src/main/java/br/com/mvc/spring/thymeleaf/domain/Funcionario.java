@@ -9,16 +9,25 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 @Entity
 public class Funcionario extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 
 	private String nome;
 	
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	@Column(columnDefinition = "DECIMAL (7,2) DEFAULT 0.00")
 	private BigDecimal salario;
 	
+	@DateTimeFormat(iso = ISO.DATE)
 	private Calendar dataEntrada;
+	
+	@DateTimeFormat(iso = ISO.DATE)
 	private Calendar dataSaida;
 	
 	@OneToOne(cascade = CascadeType.ALL)
