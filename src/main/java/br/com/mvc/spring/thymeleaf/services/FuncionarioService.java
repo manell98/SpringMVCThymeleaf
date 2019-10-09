@@ -32,6 +32,8 @@ public class FuncionarioService {
 		newObj.setSalario(obj.getSalario());
 		newObj.setDataEntrada(obj.getDataEntrada());
 		newObj.setDataSaida(obj.getDataSaida());
+		newObj.setEndereco(obj.getEndereco());
+		newObj.setCargo(obj.getCargo());
 	}
 	
 	public void delete(Integer id) {

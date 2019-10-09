@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -54,6 +55,29 @@ public class FuncionarioController {
 	@ModelAttribute("ufs")
 	public UF[] getUfs() {	
 		return UF.values();
+	}
+	
+	@RequestMapping("editar/{id}")
+	public String find(@PathVariable("id") Integer id, ModelMap model) {
+		model.addAttribute("funcionario", service.find(id));
+		
+		return "/funcionario/cadastro";
+	}
+	
+	@RequestMapping(value="editar", method=RequestMethod.POST)
+	public String editar(Funcionario funcionario, RedirectAttributes attr) {
+		service.update(funcionario);
+		attr.addFlashAttribute("success", "Funcionário editado com sucesso!");
+		
+		return "redirect:/funcionarios/listar";
+	}
+	
+	@RequestMapping("excluir/{id}")
+	public String excluir(@PathVariable("id") Integer id, RedirectAttributes attr) {
+		service.delete(id);
+		attr.addFlashAttribute("success", "Cargo excluído com sucesso!");
+	
+		return "redirect:/funcionarios/listar";
 	}
 	
 }
