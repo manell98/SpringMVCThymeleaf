@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mvc.spring.thymeleaf.domain.Cargo;
@@ -78,6 +79,13 @@ public class FuncionarioController {
 		attr.addFlashAttribute("success", "Cargo excluído com sucesso!");
 	
 		return "redirect:/funcionarios/listar";
+	}
+	
+	@RequestMapping("buscar/nome")
+	public String findNome(@RequestParam("nome") String nome, ModelMap model) {
+		model.addAttribute("funcionarios", service.findByNome(nome));
+		
+		return "/funcionario/lista";
 	}
 	
 }

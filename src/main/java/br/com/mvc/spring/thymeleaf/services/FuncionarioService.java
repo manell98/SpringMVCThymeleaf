@@ -52,5 +52,10 @@ public class FuncionarioService {
 	public List<Funcionario> findAll() {
 		return funcionarioRepository.findAll();
 	}
+
+	@Transactional(readOnly=true)
+	public List<Funcionario> findByNome(String nome) {
+		return funcionarioRepository.findByNome(nome);
+	}
 	
 }
