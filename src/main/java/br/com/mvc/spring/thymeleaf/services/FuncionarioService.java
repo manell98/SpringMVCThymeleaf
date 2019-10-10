@@ -57,5 +57,9 @@ public class FuncionarioService {
 	public List<Funcionario> findByNome(String nome) {
 		return funcionarioRepository.findByNome(nome);
 	}
+
+	public List<Funcionario> findByCargo(Integer id) {
+		return funcionarioRepository.findByCargo(id);
+	}
 	
 }

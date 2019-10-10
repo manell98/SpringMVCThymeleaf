@@ -88,4 +88,11 @@ public class FuncionarioController {
 		return "/funcionario/lista";
 	}
 	
+	@RequestMapping("buscar/cargo")
+	public String findNome(@RequestParam("id") Integer id, ModelMap model) {
+		model.addAttribute("funcionarios", service.findByCargo(id));
+		
+		return "/funcionario/lista";
+	}
+	
 }

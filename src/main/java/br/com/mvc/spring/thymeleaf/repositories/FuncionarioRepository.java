@@ -15,4 +15,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	@Query("select f from Funcionario f where f.nome like %:nome%")
 	List<Funcionario> findByNome(@Param("nome") String nome);
 
+	@Query("select f from Funcionario f where f.cargo.id = :id")
+	List<Funcionario> findByCargo(@Param("id") Integer id);
+
 }
