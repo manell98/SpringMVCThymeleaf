@@ -126,8 +126,8 @@
 	                                <span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
 	                            </button>
 	                        </td>
-	                        <td th:text="${#dates.format(f.dataEntrada, 'dd/MM/yyyy')}"> </td>
-	                        <td th:text="${#dates.format(f.dataSaida, 'dd/MM/yyyy')}"> </td>
+	                        <td th:text="${#temporals.format(f.dataEntrada, 'dd/MM/yyyy')}"> </td>
+	                        <td th:text="${#temporals.format(f.dataSaida, 'dd/MM/yyyy')}"> </td>
 	                        <td colspan="2">
 	                            <a class="btn btn-info btn-sm" th:href="@{/funcionarios/editar/{id} (id=${f.id}) }" role="button">
 	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>

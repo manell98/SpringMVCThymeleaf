@@ -1,5 +1,7 @@
 package br.com.mvc.spring.thymeleaf.services;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,13 +56,30 @@ public class FuncionarioService {
 	}
 
 	@Transactional(readOnly=true)
-	public List<Funcionario> findByNome(String nome) {
-		return funcionarioRepository.findByNome(nome);
+	public List<Funcionario> findByNomeContaining(String nome) {
+		return funcionarioRepository.findByNomeContaining(nome);
 	}
 
 	@Transactional(readOnly=true)
-	public List<Funcionario> findByCargo(Integer id) {
-		return funcionarioRepository.findByCargo(id);
+	public List<Funcionario> findByCargoId(Integer id) {
+		return funcionarioRepository.findByCargoId(id);
+	}
+
+	@Transactional(readOnly=true)
+	public List<Funcionario> findByDatas(LocalDate entrada, LocalDate saida) {
+		
+		if(entrada != null && saida != null) {
+			return funcionarioRepository.findByDataEntradaBetween(entrada,saida);
+		} 
+		else if(entrada != null) {
+			return funcionarioRepository.findByDataEntrada(entrada);
+		} 
+		else if (saida != null) {
+			return funcionarioRepository.findByDataSaida(saida);
+		}
+		
+		return new ArrayList<>();
+		
 	}
 	
 }

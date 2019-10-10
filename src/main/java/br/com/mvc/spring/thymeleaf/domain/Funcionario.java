@@ -1,7 +1,7 @@
 package br.com.mvc.spring.thymeleaf.domain;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,10 +25,10 @@ public class Funcionario extends AbstractEntity {
 	private BigDecimal salario;
 	
 	@DateTimeFormat(iso = ISO.DATE)
-	private Calendar dataEntrada;
+	private LocalDate dataEntrada;
 	
 	@DateTimeFormat(iso = ISO.DATE)
-	private Calendar dataSaida;
+	private LocalDate dataSaida;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
@@ -52,19 +52,19 @@ public class Funcionario extends AbstractEntity {
 		this.salario = salario;
 	}
 
-	public Calendar getDataEntrada() {
+	public LocalDate getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(Calendar dataEntrada) {
+	public void setDataEntrada(LocalDate dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public Calendar getDataSaida() {
+	public LocalDate getDataSaida() {
 		return dataSaida;
 	}
 
-	public void setDataSaida(Calendar dataSaida) {
+	public void setDataSaida(LocalDate dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 
