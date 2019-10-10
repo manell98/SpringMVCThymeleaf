@@ -58,6 +58,7 @@ public class FuncionarioService {
 		return funcionarioRepository.findByNome(nome);
 	}
 
+	@Transactional(readOnly=true)
 	public List<Funcionario> findByCargo(Integer id) {
 		return funcionarioRepository.findByCargo(id);
 	}

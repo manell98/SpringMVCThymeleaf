@@ -89,7 +89,7 @@ public class FuncionarioController {
 	}
 	
 	@RequestMapping("buscar/cargo")
-	public String findNome(@RequestParam("id") Integer id, ModelMap model) {
+	public String findCargo(@RequestParam("id") Integer id, ModelMap model) {
 		model.addAttribute("funcionarios", service.findByCargo(id));
 		
 		return "/funcionario/lista";
