@@ -1,4 +1,4 @@
-package br.com.mvc.spring.thymeleaf.controllers;
+package br.com.mvc.spring.thymeleaf.resources;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,7 +23,7 @@ import br.com.mvc.spring.thymeleaf.services.FuncionarioService;
 
 @Controller
 @RequestMapping("/funcionarios")
-public class FuncionarioController {
+public class FuncionarioResource {
 	
 	@Autowired
 	private FuncionarioService service;

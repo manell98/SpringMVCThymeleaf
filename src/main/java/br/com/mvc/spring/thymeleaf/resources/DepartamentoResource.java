@@ -1,4 +1,4 @@
-package br.com.mvc.spring.thymeleaf.controllers;
+package br.com.mvc.spring.thymeleaf.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import br.com.mvc.spring.thymeleaf.services.DepartamentoService;
 
 @Controller
 @RequestMapping("/departamentos")
-public class DepartamentoController {
+public class DepartamentoResource {
 	
 	@Autowired
 	private DepartamentoService service;

@@ -1,4 +1,4 @@
-package br.com.mvc.spring.thymeleaf.controllers;
+package br.com.mvc.spring.thymeleaf.resources;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import br.com.mvc.spring.thymeleaf.services.DepartamentoService;
 
 @Controller
 @RequestMapping("/cargos")
-public class CargoController {
+public class CargoResource {
 	
 	@Autowired
 	private CargoService service;

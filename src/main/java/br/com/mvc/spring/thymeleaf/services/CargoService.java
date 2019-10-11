@@ -15,7 +15,7 @@ import br.com.mvc.spring.thymeleaf.services.exceptions.ObjectNotFoundException;
 public class CargoService {
 
 	@Autowired
-	CargoRepository cargoRepository;
+	private CargoRepository cargoRepository;
 	
 	public void insert(Cargo obj) {
 		cargoRepository.save(obj);
@@ -54,5 +54,4 @@ public class CargoService {
 		}
 		return true;
 	}
-	
 }
